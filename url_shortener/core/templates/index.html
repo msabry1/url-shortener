@@ -1,0 +1,67 @@
+
+{%load static%}
+{%load abs_url%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="{% static 'css/Main.css' %}" >
+</head>
+<body>
+	<div class="header">
+		Create Short URL
+	</div>
+	<form method="POST" >
+		{%csrf_token%}
+		
+	<div class="form">
+		<div class="form-element">
+			<label for="longurl">Enter link :</label>
+			<input type="text" name="urlpath" placeholder="http://site.com" required>
+			<div style="margin-top: 10px ; " >
+			<label for="longurl">Password if You want :</label>
+			<input type="password"  name="password" placeholder="Type password"> </div>
+		</div>
+		<div class="form-element">
+			<button name="btn-submit">Create Short URL</button>
+		</div>
+	</form>
+	<br>
+		<div class="result">
+			<a href="{{shorturl}}" id="short-url" target="_blank">{{shorturl}}</a>
+
+		</div>
+	</div>
+	{% if request.user.is_authenticated%}
+	<div class="list">
+		<h2>Shorten links</h2>
+		<table class="table">
+			<thead class="thead-dark">
+			  <tr>
+				<th scope="col">number</th>
+				<th scope="col">Shorten Url</th>
+				<th scope="col">Original Url </th>
+				<th scope="col">Views</th>
+			  </tr>
+			</thead>
+			<tbody>
+				{%for link in urls%}
+			  <tr>
+				<th scope="row">{{forloop.counter}}</th>
+				<td><a href="{{link.shortenurl|get_absolute_url:request}}" >{{link.shortenurl|get_absolute_url:request}}</a></td>
+				<td><a href="{{link.originalurl}}">{{link.originalurl|slice:":35"}}</a></td>
+				<td>{{link.urlviews}}</td>
+			  </tr>
+			  {%empty%}
+			  <h3 style="text-align: center; margin-top:10px;">You haven't Any links , Add some to show here </h3>
+			  {%endfor%}
+			</tbody>
+		</table>
+	</div>
+	{%else%}
+	<h3 style="text-align: center; margin-top:10px;">Login to save your links and Know link views </h3>
+	{% endif%}
+
+	
+</body>
+</html>
