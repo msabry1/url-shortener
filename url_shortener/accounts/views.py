@@ -26,7 +26,7 @@ def login(request):
                     pass
                 else :
                     messages.error(request,'Recaptcha error')
-                    return render(requests,'login.html')
+                    return render(request,'login.html')
 
 
             if username and password:
@@ -56,7 +56,7 @@ def login(request):
                     pass
                 else :
                     messages.error(request,'Recaptcha Error')
-                    return render(requests,'login.html')
+                    return render(request,'login.html')
 
             if first_name and last_name and re.match(r'''^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$''',email) and username and password:
                 if not User.objects.filter(username=username).exists():
