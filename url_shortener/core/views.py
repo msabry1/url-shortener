@@ -9,7 +9,7 @@ import random
 def get_path(num):
     path = ''.join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890",k=num))
     try :
-        if  Url.objects.filter(shortenurl=path):
+        if  Url.objects.filter(shortenurl=path) or path.lower() in ['accounts','admin']:
             return get_path(num)
         else :
             return path
@@ -43,8 +43,7 @@ def url(request):
 def urldetail(request,short_str):
     url = Url.objects.filter(shortenurl=short_str)
     if url.exists():
-        url = Url.objects.get(shortenurl='hort_str')
-        print(url)
+        url = Url.objects.get(shortenurl=short_str)
         if url.password:
             return redirect(f'/{url.shortenurl}/password')
         else :
@@ -52,7 +51,7 @@ def urldetail(request,short_str):
             url.save()
             return redirect(url.originalurl)
     else :
-        return render(request,'404.html')
+        return render(request,'404.html',status=404)
 
 
 
@@ -61,8 +60,6 @@ def urlpassword(request,short_str):
         password = request.POST.get('password')
         if password and 'password-btn' in request.POST:
             url_object = Url.objects.get(shortenurl=short_str)
-            print((request.build_absolute_uri(url_object.originalurl)))
-            print((request.build_absolute_uri()))
             if url_object.password == password:
                 url_object.urlviews += 1
                 url_object.save()

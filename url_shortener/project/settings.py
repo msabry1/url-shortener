@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'core',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +125,14 @@ STATICFILES_DIRS = ['core/static/']
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Recaptcha ---------------------------#
+# if you want it Change it to True
+
+RECAPTCHA_LOGIN = False
+RECAPTCHA_SIGNUP = True
+RECAPTCHA_SITE_KEY = "Put Here"
+RECAPTCHA_SECRET_KEY =  "Put Here"
+
+#--------------------------------------#
