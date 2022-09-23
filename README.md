@@ -5,12 +5,13 @@
 A simple Django project that you can short URLS and protect them with Password 
 
 ## Run
--` git clone https://github.com/Python-Egypt/url_shortener.git `
+- ` git clone https://github.com/Python-Egypt/url_shortener.git `
 
-` cd "url_shortener/url_shortener" `
+- ` cd "url_shortener/url_shortener" `
 
-`pip install -r requirements.txt`
-`python manage.py runserver`
+- `pip install -r requirements.txt`
+
+- `python manage.py runserver`
 
 
 
