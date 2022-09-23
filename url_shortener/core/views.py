@@ -33,7 +33,8 @@ def url(request):
                     instance = Url(user=request.user if request.user.is_authenticated else None,originalurl=originalurl,shortenurl=get_path(num),password=password)
                     instance.save()
                     return render(request,'index.html',{
-                        'shorturl':request.build_absolute_uri(instance.shortenurl)
+                        'shorturl':request.build_absolute_uri(instance.shortenurl),
+                        "urls":Url.objects.filter(user=request.user if request.user.is_authenticated else None)
                     })
     else:
         return render(request,'index.html',{"urls":Url.objects.filter(user=request.user if request.user.is_authenticated else None)})
